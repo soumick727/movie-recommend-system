@@ -1,4 +1,7 @@
 import axios from "axios";
+import  dotenv from "dotenv";
+
+dotenv.config({ path: "./backend/.env" });
 
 export const fetchFromTMDB = async (url) => {
     if (!process.env.TMDB_API_KEY) {
@@ -8,14 +11,15 @@ export const fetchFromTMDB = async (url) => {
   const options = {
     headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
+        Authorization: 'Bearer ' + process.env.TMDB_API_KEY
     },
   };
-    try {
-        const { data } = await axios.get(url, options);
-        return data;
-    } catch (error) {
-        console.error("Error fetching data from TMDB:", error);
-        throw error; // Rethrow the error to handle it in the calling function
+   
+  const response = await axios.get(url, options);
+
+    if (response.status !== 200) {
+        throw new Error(`Error fetching data from TMDB: ${response.statusText}`);
     }
+
+    return response.data;
 }

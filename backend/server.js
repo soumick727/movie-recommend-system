@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from 'cors';
 import authRoutes from "./routes/auth.route.js";
 import movieRoutes from "./routes/movie.route.js";
+import tvRoutes from "./routes/tv.route.js";
 import cookieParser from 'cookie-parser';
 import path from "path";
 
@@ -22,10 +23,14 @@ app.use(express.urlencoded({ extended: false}))
 
 app.use("/images",express.static(path.join(process.cwd(), 'images')));
 
-// routes
+// routes for authentication
 app.use("/api/v1/auth",authRoutes);
-
+// routes for movies
 app.use("/api/v1/movie",movieRoutes);
+// routes for tv
+app.use("/api/v1/tv",tvRoutes);
+
+
 
 
 
