@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+.cover-pg{
+    background-image: linear-gradient(rgb(0,0,0,0.8), rgb(0,0,0,0.1)) ,url("coverpage.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100dvh;
+    width: 100%;
+    position: relative;
+
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+  
+  .animate-fade-in-delay {
+    animation: fade-in 1.5s ease-out forwards;
+  }
+  
+  .animate-fade-in-delay2 {
+    animation: fade-in 2s ease-out forwards;
+  }
+  
