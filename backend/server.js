@@ -5,8 +5,10 @@ import cors from 'cors';
 import authRoutes from "./routes/auth.route.js";
 import movieRoutes from "./routes/movie.route.js";
 import tvRoutes from "./routes/tv.route.js";
+import searchRoutes from "./routes/search.route.js";
 import cookieParser from 'cookie-parser';
 import path from "path";
+import { verifyToken } from "./middlewares/auth.middleware.js";
 
 dotenv.config({ path: "./backend/.env" });
 
@@ -26,9 +28,11 @@ app.use("/images",express.static(path.join(process.cwd(), 'images')));
 // routes for authentication
 app.use("/api/v1/auth",authRoutes);
 // routes for movies
-app.use("/api/v1/movie",movieRoutes);
+app.use("/api/v1/movie", verifyToken,movieRoutes);
 // routes for tv
-app.use("/api/v1/tv",tvRoutes);
+app.use("/api/v1/tv", verifyToken, tvRoutes);
+// routes for search
+app.use("/api/v1/search", verifyToken, searchRoutes);
 
 
 

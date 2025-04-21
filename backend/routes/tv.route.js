@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../middlewares/auth.middleware.js";
+
 
 
 import { getTrendingTv, getPopularTv, searchTvs, getGenres, getTvVideos, getTvDetails, getSimilarTvs, getTvsByCategory } from "../controllers/tv.controller.js";
