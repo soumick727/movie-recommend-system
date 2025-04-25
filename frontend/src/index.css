@@ -1,30 +1,107 @@
 @import "tailwindcss";
 
-.cover-pg{
-    background-image: linear-gradient(rgb(0,0,0,0.8), rgb(0,0,0,0.1)) ,url("coverpage.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100dvh;
-    width: 100%;
-    position: relative;
-
+/* Cover background (used by outermost div) */
+.cover-pg {
+  background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.4)),
+              url("/hero.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100dvh;
+  width: 100%;
+  position: relative;
 }
 
+/* Subtle fade-in animations */
 @keyframes fade-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .animate-fade-in {
-    animation: fade-in 1s ease-out forwards;
-  }
-  
-  .animate-fade-in-delay {
-    animation: fade-in 1.5s ease-out forwards;
-  }
-  
-  .animate-fade-in-delay2 {
-    animation: fade-in 2s ease-out forwards;
-  }
-  
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fade-in 1.5s ease-out forwards;
+}
+
+.animate-fade-in-delay2 {
+  animation: fade-in 2s ease-out forwards;
+}
+
+/* Overlay for dark blur */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+/* Centered glassmorphism card */
+.form-container {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 420px;
+  color: white;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+}
+
+/* Inputs */
+.signup-form input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Placeholder styling */
+.signup-form input::placeholder {
+  color: #ccc;
+}
+
+/* Button */
+.signup-form button {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #facc15;
+  color: black;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.signup-form button:hover {
+  background-color: #eab308;
+}
+
+/* Login link */
+.signin-link {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #eee;
+}
+
+.signin-link a {
+  color: #facc15;
+  font-weight: 500;
+  text-decoration: underline;
+}
