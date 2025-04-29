@@ -5,6 +5,7 @@ import cors from 'cors';
 import authRoutes from "./routes/auth.route.js";
 import movieRoutes from "./routes/movie.route.js";
 import tvRoutes from "./routes/tv.route.js";
+import publicRoutes from "./routes/public.route.js";
 import searchRoutes from "./routes/search.route.js";
 import cookieParser from 'cookie-parser';
 import path from "path";
@@ -17,7 +18,8 @@ const app = express();
 
 //MIddleware
 app.use(express.json()); // will allow us to parse req.body 
-app.use(cors());
+// app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors())
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false}))
 
@@ -28,12 +30,14 @@ app.use("/images",express.static(path.join(process.cwd(), 'images')));
 // routes for authentication
 app.use("/api/v1/auth",authRoutes);
 // routes for movies
-app.use("/api/v1/movie", verifyToken,movieRoutes);
+app.use("/api/v1/movie", verifyToken ,movieRoutes);
 // routes for tv
 app.use("/api/v1/tv", verifyToken, tvRoutes);
 // routes for search
 app.use("/api/v1/search", verifyToken, searchRoutes);
 
+// Public routes (no auth)
+app.use("/api/v1/public", publicRoutes);
 
 
 
