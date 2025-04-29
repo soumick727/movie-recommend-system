@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import "../index.css"; // Assuming Tailwind is configured here
 
 const SignUpPage = () => {
+  const {searchParams} = new URL(document.location);
+  const emailValue = searchParams.get("email") || "";
   // Function to handle form submission (to be implemented)
-  const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState(emailValue||"");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
