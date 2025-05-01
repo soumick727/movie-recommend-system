@@ -7,9 +7,6 @@ dotenv.config({ path: "./backend/.env" });
 export async function verifyToken(req, res, next) {
     try {
         const token = req.cookies["token"];
-        if (!token && req.headers.authorization?.startsWith("Bearer ")) {
-            token = req.headers.authorization.split(" ")[1];
-        }
         if (!token) {
             return res.status(401).json({
                 success: false,

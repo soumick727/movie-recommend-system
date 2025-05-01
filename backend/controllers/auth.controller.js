@@ -194,3 +194,24 @@ export async function logout(req, res) {
         });
     }
 }
+
+export async function checkAuth(req, res) {
+   try {
+     // 🔍 Add this line to see if the cookie is coming through
+     console.log("Cookies received:", req.cookies);
+    console.log("req.user:", req.user); // Debugging log to check user data
+      res.status(200).json({
+         success: true,
+         message: "User is authenticated",
+         user: req.user, // Send the authenticated user data
+      });
+        
+
+   } catch (error) {
+        console.log("Error checking authentication:", error.message);
+        res.status(500).json({
+             success: false,
+             message: "Server error",
+        });
+   }
+}

@@ -19,7 +19,8 @@ const app = express();
 //MIddleware
 app.use(express.json()); // will allow us to parse req.body 
 // app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
-app.use(cors())
+app.use(cors(
+))
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false}))
 
