@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+
+
 /* Cover background (used by outermost div) */
 .cover-pg {
   background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.4)),
@@ -105,5 +107,9 @@
   font-weight: 500;
   text-decoration: underline;
 }
+
+
+/* team section part */
+
 
 

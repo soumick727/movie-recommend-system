@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+
+import { useAuthUser } from "../store/authUser";
 import "../index.css"; // Assuming Tailwind is configured here
 
 const SignUpPage = () => {
+
+  const navigate = useNavigate();
   const {searchParams} = new URL(document.location);
   const emailValue = searchParams.get("email") || "";
   // Function to handle form submission (to be implemented)
@@ -10,11 +14,24 @@ const SignUpPage = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const handleSubmit = (e) => {
+  const {signup} = useAuthUser();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., API call)
     console.log("Form submitted:", { email, username, password });
-  }
+    if (!email || !username || !password) {
+      toast.error("Please fill in all the fields.");
+      return;
+    }
+    try {
+      await signup({ email, username, password });  // Wait for signup to complete
+      navigate("/login");                           // Redirect after success
+    } catch (error) {
+      console.error("Signup failed, not redirecting.");
+      // No redirect on error
+    }
+  };
+  
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Visual + Text */}

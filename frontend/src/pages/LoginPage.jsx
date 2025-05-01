@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthUser } from "../store/authUser";
 import "../index.css";
 
 const LoginPage = () => {
@@ -7,15 +8,15 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const {login, isSignedIn} = useAuthUser(); // Assuming you have a custom hook for authentication
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform the login logic here, e.g., send data to an API
     console.log("Email:", email);
     console.log("Password:", password);
+    login({email,password}); // Call the login function (to be implemented)
     // Reset form (optional)
-    setEmail('');
-    setPassword('');
   };
 
   return (
