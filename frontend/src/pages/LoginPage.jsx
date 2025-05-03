@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {login, isSignedIn} = useAuthUser(); // Assuming you have a custom hook for authentication
+  const {login, isLoggingIn} = useAuthUser(); // Assuming you have a custom hook for authentication
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();

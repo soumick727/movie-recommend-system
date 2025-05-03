@@ -17,15 +17,15 @@ export const useAuthUser = create((set) => ({
         withCredentials: true, // Only needed if using cookies for auth
       });
 
-      //set({ user: response.data.user });
-      toast.success("Signup successful. Now you can login!");
+      set({ user: response.data.user, isSigningUp: false });
+      toast.success("Account created successfully");
     } catch (error) {
       console.error("Signup error:", error);
+      set({ user: null, isSigningUp: false });
       toast.error(error.response.data.message || "Something went wrong!");
+      
     
-    } finally {
-      set({ isSigningUp: false });
-    }
+    } 
   },
 
     // Login function
@@ -35,13 +35,12 @@ export const useAuthUser = create((set) => ({
       const response = await axios.post("/api/v1/auth/login", credential, {
         withCredentials: true, // Only needed if using cookies for auth
       });
-      set({ user: response.data.user });
+      set({ user: response.data.user, isLoggingIn: false });
       toast.success("Login successful!");
     } catch (error) {
       console.error("Login error:", error);
+      set({ user: null, isLoggingIn: false });
       toast.error(error.response.data.message || "Something went wrong!");
-    } finally {
-      set({ isLoggingIn: false });
     }
   },
 
@@ -50,14 +49,13 @@ export const useAuthUser = create((set) => ({
     set({ isLoggingOut: true });
     try {
       await axios.post("/api/v1/auth/logout", {}, { withCredentials: true });
-      set({ user: null });
+      set({ user: null, isLoggingOut: false });
       toast.success("Logout successful!");
     } catch (error) {
       console.error("Logout error:", error);
+      set({ user: null, isLoggingOut: false });
       toast.error(error.response.data.message || "Something went wrong!");
-    } finally {
-      set({ isLoggingOut: false });
-    }
+    } 
     },
 
     // Check authentication status

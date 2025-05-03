@@ -19,7 +19,7 @@ const TrendingCarousel = () => {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const res = await axios.get('http://192.168.0.4:5000/api/v1/public/trending');
+        const res = await axios.get('/api/v1/public/trending');
         const data = res.data.content?.results || [];
         setTrendingMovies(data);
       } catch (err) {

@@ -1,12 +1,11 @@
 import React from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useAuthUser } from "../store/authUser";
 import "../index.css"; // Assuming Tailwind is configured here
 
 const SignUpPage = () => {
 
-  const navigate = useNavigate();
   const {searchParams} = new URL(document.location);
   const emailValue = searchParams.get("email") || "";
   // Function to handle form submission (to be implemented)
@@ -14,23 +13,17 @@ const SignUpPage = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const {signup} = useAuthUser();
+  const {signup,isSigningUp} = useAuthUser();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", { email, username, password });
-    if (!email || !username || !password) {
-      toast.error("Please fill in all the fields.");
-      return;
-    }
-    try {
-      await signup({ email, username, password });  // Wait for signup to complete
-      navigate("/login");                           // Redirect after success
-    } catch (error) {
-      console.error("Signup failed, not redirecting.");
-      // No redirect on error
-    }
-  };
+    // Perform the signup logic here, e.g., send data to an API
+    console.log("Email:", email);
+    console.log("Username:", username);
+    console.log("Password:", password);
+    signup({email,username,password}); // Call the signup function (to be implemented)
+    
+  }
   
   return (
     <div className="min-h-screen flex">
