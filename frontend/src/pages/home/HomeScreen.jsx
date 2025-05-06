@@ -6,12 +6,15 @@ import useGetTrendingContent from '../../hooks/useGetTrendingContent';
 import useGetGenres from '../../hooks/useGenres';
 import NavbarHomeScreen from '../../components/NavbarHomeScreen';
 import { LARGE_IMG_BASE_URL,MOVIE_CATEGORIES,TV_CATEGORIES } from '../../utils/constants';
-import { FaHeart } from 'react-icons/fa';
+
 import { useContentStore } from '../../store/content';
 import MovieSlider from '../../components/MovieSlider';
 
 
 const HomeScreen = () => {
+  
+  
+
   const trendingContent = useGetTrendingContent();
   const genreNames = useGetGenres();
   const { contentType } = useContentStore();
@@ -170,11 +173,7 @@ const HomeScreen = () => {
                         className="flex items-center gap-2 bg-gray-500/70 hover:bg-gray-600 text-white py-1.5 px-3 sm:py-2 sm:px-4 rounded text-sm transition"
                       >
                         <Info className="w-4 h-4 sm:w-5 sm:h-5" /> More Info
-                      </Link>
-
-                      <button className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-sm font-semibold transition">
-                        <FaHeart className="text-red-400" /> Wishlist
-                      </button>
+                      </Link>                  
                     </div>
                   </motion.div>
                 )}

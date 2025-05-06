@@ -63,21 +63,15 @@ const LoginPage = () => {
             <p className="text-xs text-gray-500 mt-1">We will never share your email.</p>
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium mb-1">Create password</label>
+            <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
             <input
               type="password"
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              placeholder="enter your password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <p className="text-xs text-gray-500 mt-1">10 characters minimum</p>
-            <ul className="text-xs text-gray-500 mt-2 list-disc pl-5 space-y-1">
-              <li>Uppercase letter</li>
-              <li>Lowercase letter</li>
-              <li>Number</li>
-              <li>Special character</li>
-            </ul>
           </div>
 
           <button type="submit" className="w-full bg-yellow-400 hover:bg-yellow-500 text-black py-3 rounded-md font-bold mt-4">

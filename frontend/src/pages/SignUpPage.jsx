@@ -12,6 +12,22 @@ const SignUpPage = () => {
   const [email, setEmail] = React.useState(emailValue||"");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const passwordRules = {
+    upper: /[A-Z]/,
+    lower: /[a-z]/,
+    number: /[0-9]/,
+    special: /[^A-Za-z0-9]/,
+    length: /^.{10,}$/,
+  };
+  
+  const passwordStatus = {
+    upper: passwordRules.upper.test(password),
+    lower: passwordRules.lower.test(password),
+    number: passwordRules.number.test(password),
+    special: passwordRules.special.test(password),
+    length: passwordRules.length.test(password),
+  };
+  
 
   const {signup,isSigningUp} = useAuthUser();
 
@@ -79,13 +95,25 @@ const SignUpPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             />
-            <p className="text-xs text-gray-500 mt-1">10 characters minimum</p>
-            <ul className="text-xs text-gray-500 mt-2 list-disc pl-5 space-y-1">
-              <li>Uppercase letter</li>
-              <li>Lowercase letter</li>
-              <li>Number</li>
-              <li>Special character</li>
-            </ul>
+           <p className="text-xs text-gray-500 mt-1">10 characters minimum</p>
+                <ul className="text-sm mt-2 space-y-1 pl-5">
+                  <li className={`flex items-center gap-2 ${passwordStatus.upper ? "text-green-600" : "text-gray-500"}`}>
+                    {passwordStatus.upper ? "✅" : "❌"} Uppercase letter
+                  </li>
+                  <li className={`flex items-center gap-2 ${passwordStatus.lower ? "text-green-600" : "text-gray-500"}`}>
+                    {passwordStatus.lower ? "✅" : "❌"} Lowercase letter
+                  </li>
+                  <li className={`flex items-center gap-2 ${passwordStatus.number ? "text-green-600" : "text-gray-500"}`}>
+                    {passwordStatus.number ? "✅" : "❌"} Number
+                  </li>
+                  <li className={`flex items-center gap-2 ${passwordStatus.special ? "text-green-600" : "text-gray-500"}`}>
+                    {passwordStatus.special ? "✅" : "❌"} Special character
+                  </li>
+                  <li className={`flex items-center gap-2 ${passwordStatus.length ? "text-green-600" : "text-gray-500"}`}>
+                    {passwordStatus.length ? "✅" : "❌"} Minimum 10 characters
+                  </li>
+                </ul>
+
           </div>
 
           <button type="submit" className="w-full bg-yellow-400 hover:bg-yellow-500 text-black py-3 rounded-md font-bold mt-4">
