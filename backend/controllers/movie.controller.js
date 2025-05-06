@@ -151,3 +151,57 @@ export async function getMoviesByCategory(req,res){
             message: "Internal Server Error" });
     }
 }
+
+export async function getMovieCredits(req,res){
+    try {
+        const { movieId } = req.params;
+        const url = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`;
+        const data = await fetchFromTMDB(url);
+        res.json({
+            success: true,
+            message: "Movie credits fetched successfully",
+            content: data,
+        });
+    } catch (error) {
+        console.error("Error fetching movie credits:", error.message);
+        res.status(500).json({ 
+            success: false,
+            message: "Internal Server Error" });
+    }
+}
+
+export async function getMovieRecommendations(req,res){
+    try {
+        const { movieId } = req.params;
+        const url = `https://api.themoviedb.org/3/movie/${movieId}/recommendations?language=en-US&page=1`;
+        const data = await fetchFromTMDB(url);
+        res.json({
+            success: true,
+            message: "Movie recommendations fetched successfully",
+            content: data,
+        });
+    } catch (error) {
+        console.error("Error fetching movie recommendations:", error.message);
+        res.status(500).json({ 
+            success: false,
+            message: "Internal Server Error" });
+    }
+}
+
+export async function getMovieReviews(req,res){
+    try {
+        const { movieId } = req.params;
+        const url = `https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`;
+        const data = await fetchFromTMDB(url);
+        res.json({
+            success: true,
+            message: "Movie reviews fetched successfully",
+            content: data,
+        });
+    } catch (error) {
+        console.error("Error fetching movie reviews:", error.message);
+        res.status(500).json({ 
+            success: false,
+            message: "Internal Server Error" });
+    }
+}

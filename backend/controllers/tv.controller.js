@@ -155,3 +155,60 @@ export async function getTvsByCategory(req, res) {
         });
     }
 }
+
+export async function getTvCredits(req, res) {
+    try {
+        const { TvId } = req.params;
+        const url = `https://api.themoviedb.org/3/tv/${TvId}/credits?language=en-US`;
+        const data = await fetchFromTMDB(url);
+        res.json({
+            success: true,
+            message: "TV show credits fetched successfully",
+            content: data,
+        });
+    } catch (error) {
+        console.error("Error fetching TV credits:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+}
+
+export async function getTvRecommendations(req, res) {
+    try {
+        const { TvId } = req.params;
+        const url = `https://api.themoviedb.org/3/tv/${TvId}/recommendations?language=en-US&page=1`;
+        const data = await fetchFromTMDB(url);
+        res.json({
+            success: true,
+            message: "TV show recommendations fetched successfully",
+            content: data,
+        });
+    } catch (error) {
+        console.error("Error fetching TV recommendations:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+}
+
+export async function getTvReviews(req, res) {
+    try {
+        const { TvId } = req.params;
+        const url = `https://api.themoviedb.org/3/tv/${TvId}/reviews?language=en-US&page=1`;
+        const data = await fetchFromTMDB(url);
+        res.json({
+            success: true,
+            message: "TV show reviews fetched successfully",
+            content: data,
+        });
+    } catch (error) {
+        console.error("Error fetching TV reviews:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+}

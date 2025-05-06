@@ -2,7 +2,7 @@ import express from "express";
 
 
 
-import { getTrendingTv, getPopularTv, searchTvs, getGenres, getTvVideos, getTvDetails, getSimilarTvs, getTvsByCategory } from "../controllers/tv.controller.js";
+import { getTrendingTv, getPopularTv, searchTvs, getGenres, getTvVideos, getTvDetails, getSimilarTvs, getTvsByCategory,getTvCredits,getTvRecommendations,getTvReviews } from "../controllers/tv.controller.js";
 
 const router = express.Router();
 
@@ -18,6 +18,10 @@ router.get("/genres", getGenres);
 router.get("/:TvId/videos", getTvVideos);
 router.get("/:TvId/details", getTvDetails);
 router.get("/:TvId/similar", getSimilarTvs);
-router.get("/category/:category", getTvsByCategory);
+router.get("/:category", getTvsByCategory);
+router.get("/:TvId/credits", getTvCredits);
+router.get("/:TvId/recommendations", getTvRecommendations);
+router.get("/:TvId/reviews", getTvReviews);
+
  
 export default router;
