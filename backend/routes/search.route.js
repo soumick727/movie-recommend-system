@@ -5,12 +5,12 @@ import { verifyToken } from '../middlewares/auth.middleware.js';
 const router = express.Router();
 
 
-router.get('/movie/:query', verifyToken, searchMovies);
-router.get('/tv/:query', verifyToken, searchTvs);
-router.get('/person/:query', verifyToken, searchPerson);
-router.get("/history", verifyToken, getSearchHistory);
-router.delete("/history/:id", verifyToken, deleteSearchHistory);
-router.delete("/history", verifyToken, deleteAllSearchHistory);
+router.get('/movie/:query',  searchMovies);
+router.get('/tv/:query',  searchTvs);
+router.get('/person/:query',  searchPerson);
+router.get("/history",  getSearchHistory);
+router.delete("/history/:id",  deleteSearchHistory);
+router.delete("/history",  deleteAllSearchHistory);
 
 
 export default router;
