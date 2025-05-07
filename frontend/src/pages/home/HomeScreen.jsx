@@ -45,12 +45,18 @@ const HomeScreen = () => {
 
   return (
     <>
-      <NavbarHomeScreen />
-      <div className="relative w-full h-screen text-white overflow-hidden max-h-screen">
+      
+      {/* Navbar for home screen */}
 
+      <div className='relative'>
+      <NavbarHomeScreen />
+      <div className="relative w-full h-screen text-white overflow-visible ">
+      
             {/* Background Image */}
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" >
+            
               {featureContent ? (
+                
                 <motion.img
                   key={featureContent?.id}
                   initial={{ opacity: 0 }}
@@ -59,7 +65,7 @@ const HomeScreen = () => {
                   transition={{ duration: 0.8 }}
                   src={`${LARGE_IMG_BASE_URL}${featureContent.backdrop_path || featureContent.poster_path}`}
                   alt={featureContent.title || featureContent.name}
-                  className="absolute inset-0 w-full h-full object-cover object-top brightness-[0.6]"
+                  className="absolute inset-0 w-full h-full object-cover object-top brightness-[0.6] z-0"
                 />
               ) : (
                 <motion.div
@@ -191,6 +197,8 @@ const HomeScreen = () => {
 
         }
       </div>
+      </div>
+      
     
     </>
   );

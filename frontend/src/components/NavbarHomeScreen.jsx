@@ -9,14 +9,9 @@ const NavbarHomeScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const { user, logout } = useAuthUser();
   const navigate = useNavigate();
   const { contentType, setContentType } = useContentStore();
-
-  //console.log("user in navbar :", user);
-    console.log("content type in navbar :", contentType);
-
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -25,11 +20,8 @@ const NavbarHomeScreen = () => {
         setShowDropdown(false);
       }
     };
-
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        setShowDropdown(false);
-      }
+      if (e.key === "Escape") setShowDropdown(false);
     };
 
     if (showDropdown) {
@@ -54,17 +46,10 @@ const NavbarHomeScreen = () => {
     navigate("/login");
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${searchQuery}`);
-      setSearchQuery("");
-    }
-  };
-
   return (
-    <header className="bg-black text-white shadow-md sticky top-0 z-50">
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <>
+    <header className="backdrop-blur-md relative bg-black/40 text-white shadow-md  top-0 z-50 border-b border-yellow-400/30">
+      <nav className="container  mx-auto px-4 py-3 flex items-center justify-between">
         <Link
           to="/"
           className="text-3xl font-extrabold text-yellow-400 tracking-widest"
@@ -72,162 +57,120 @@ const NavbarHomeScreen = () => {
           BeeWatch
         </Link>
 
-        {/* Desktop Search */}
-        <form
-          onSubmit={handleSearch}
-          className="hidden md:flex items-center bg-zinc-900 border border-zinc-700 rounded-full px-4 py-1.5 focus-within:ring-2 focus-within:ring-yellow-400"
-        >
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search movies or shows..."
-            className="bg-transparent text-sm text-white placeholder-gray-400 outline-none w-64 md:w-80"
-          />
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center space-x-6">
           <button
-            type="submit"
-            className="text-yellow-400 hover:text-yellow-500 ml-2"
+            onClick={() => navigate('/search')}
+            className="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-full shadow transition hover:scale-105"
           >
             <Search size={20} />
+            Search
           </button>
-        </form>
 
-        {/* Desktop Nav Links */}
-        <ul className="hidden md:flex gap-6 items-center text-base font-semibold ml-6">
-          <li>
-            <Link to="/" className="hover:text-yellow-400 transition">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/"
-              className="hover:text-yellow-400 transition"
-              onClick={() => setContentType("movie")}
-            >
-              Movies
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/"
-              className="hover:text-yellow-400 transition"
-              onClick={() => setContentType("tv")}
-            >
-              TV Shows
-            </Link>
-          </li>
-          <li>
-            <Link to="/watchlist" className="hover:text-yellow-400 transition">
-              Watchlist
-            </Link>
-          </li>
-          <li>
-            <Link to="/history" className="hover:text-yellow-400 transition">
-              Search History
-            </Link>
-          </li>
-        </ul>
+          <Link to="/" onClick={() => setContentType("movie")} className="hover:text-yellow-400 transition">
+            Movies
+          </Link>
+          <Link to="/" onClick={() => setContentType("tv")} className="hover:text-yellow-400 transition">
+            TV Shows
+          </Link>
+          <Link to="/watchlist" className="hover:text-yellow-400 transition">
+            Watchlist
+          </Link>
+          <Link to="/history" className="hover:text-yellow-400 transition">
+            Search History
+          </Link>
+        </div>
 
-        {/* User Dropdown */}
+
+        {/* User Profile Dropdown */}
         {user && (
           <div className="hidden md:flex relative" ref={dropdownRef}>
             <button
               onClick={() => setShowDropdown(!showDropdown)}
               aria-label="Toggle user menu"
               aria-expanded={showDropdown}
-              className="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-full font-semibold shadow-sm"
+              className="flex items-center justify-center w-10 h-10 text-lg font-bold uppercase bg-yellow-400 hover:bg-yellow-500 text-black rounded-full shadow"
             >
-              <User size={18} />
-              {user.username}
+              {user.username.charAt(0)}
             </button>
 
             {showDropdown && (
-              <div className="absolute right-0 mt-2 w-32 bg-white text-black rounded shadow-lg z-10 transition duration-200">
-                <button
-                  onClick={handleLogoutClick}
-                  className="block w-full text-left px-4 py-2 text-sm font-medium text-black hover:bg-yellow-100 rounded-b"
-                >
-                  <LogOut size={16} className="inline mr-2 mb-0.5" />
-                  Logout
-                </button>
-              </div>
+          <div className="absolute right-0 mt-2 w-60 bg-white text-black rounded-lg shadow-lg z-50 overflow-hidden">
+            <div className="px-4 py-3 border-b border-gray-200">
+              <p className="text-sm font-semibold">{user.username}</p>
+              <p className="text-xs text-gray-500">{user.email}</p>
+            </div>
+
+            <button
+              onClick={() => {
+                setShowDropdown(false);
+                navigate("/watchlist");
+              }}
+              className="w-full text-left px-4 py-2 text-sm hover:bg-yellow-100"
+            >
+              📺 Watchlist
+            </button>
+
+            <button
+              onClick={handleLogoutClick}
+              className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-yellow-100 flex items-center gap-2"
+            >
+              <LogOut size={16} />
+              Logout
+            </button>
+          </div>
             )}
           </div>
         )}
 
-        {/* Hamburger Menu */}
+
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle mobile menu"
-            aria-expanded={isOpen}
-            className="text-white"
+            className="text-yellow-400 hover:text-yellow-300 transition"
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Nav */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-black px-4 pb-6 space-y-4 text-base font-medium">
-          <form
-            onSubmit={handleSearch}
-            className="flex items-center bg-zinc-900 border border-zinc-700 rounded-full px-4 py-2"
+        <div className="md:hidden bg-black/90 px-4 pb-6 pt-2 space-y-4 text-base font-medium transition-all">
+          <button
+            onClick={() => {
+              setIsOpen(false);
+              navigate('/search');
+            }}
+            className="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-full shadow w-full"
           >
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search..."
-              className="bg-transparent text-white outline-none placeholder-gray-400 flex-1 text-sm"
-            />
-            <button
-              type="submit"
-              className="text-yellow-400 hover:text-yellow-500"
-            >
-              <Search size={18} />
-            </button>
-          </form>
+            <Search size={18} />
+            Search
+          </button>
 
           <ul className="space-y-3">
             <li>
-              <Link to="/" onClick={() => setIsOpen(false)}>
-                Home
-              </Link>
+              <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
             </li>
             <li>
-              <Link
-                to="/"
-                onClick={() => {
-                  setContentType("movie");
-                  setIsOpen(false);
-                }}
-              >
-                Movies
-              </Link>
+              <Link to="/" onClick={() => {
+                setContentType("movie");
+                setIsOpen(false);
+              }}>Movies</Link>
             </li>
             <li>
-              <Link
-                to="/"
-                onClick={() => {
-                  setContentType("tv");
-                  setIsOpen(false);
-                }}
-              >
-                TV Shows
-              </Link>
+              <Link to="/" onClick={() => {
+                setContentType("tv");
+                setIsOpen(false);
+              }}>TV Shows</Link>
             </li>
             <li>
-              <Link to="/watchlist" onClick={() => setIsOpen(false)}>
-                Watchlist
-              </Link>
+              <Link to="/watchlist" onClick={() => setIsOpen(false)}>Watchlist</Link>
             </li>
             <li>
-              <Link to="/history" onClick={() => setIsOpen(false)}>
-                Search History
-              </Link>
+              <Link to="/history" onClick={() => setIsOpen(false)}>Search History</Link>
             </li>
             {user && (
               <li>
@@ -245,8 +188,7 @@ const NavbarHomeScreen = () => {
           </ul>
         </div>
       )}
-
-      {/* Confirm Logout Modal */}
+    </header>
       {showModal && (
         <ConfirmModal
           title="Confirm Logout"
@@ -255,8 +197,10 @@ const NavbarHomeScreen = () => {
           onCancel={() => setShowModal(false)}
         />
       )}
-    </header>
+    </>
   );
+     
+  
 };
 
 export default NavbarHomeScreen;

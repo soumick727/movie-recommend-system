@@ -3,6 +3,7 @@ import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import WatchPage from "./pages/WatchPage";
+import SearchPage from "./pages/SearchPage";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 import { Loader } from "lucide-react";
@@ -54,7 +55,9 @@ function App() {
           <Route path="/signup" element={!user ? <SignUpPage /> : <Navigate to="/" />} />
           {/* watch page */}
           <Route path="/watch/:id" element={user ? <WatchPage /> : <Navigate to="/login" />} />
-          {/* 404 page */}
+          {/* search page */ }
+          <Route path="/search" element={user ? <SearchPage /> : <Navigate to="/login" />} />
+          
         </Routes>
       </main>
 
