@@ -5,7 +5,7 @@ import cors from 'cors';
 import authRoutes from "./routes/auth.route.js";
 import movieRoutes from "./routes/movie.route.js";
 import tvRoutes from "./routes/tv.route.js";
-
+import personRoutes from "./routes/person.route.js";
 import publicRoutes from "./routes/public.route.js";
 import searchRoutes from "./routes/search.route.js";
 import cookieParser from 'cookie-parser';
@@ -39,6 +39,8 @@ app.use("/api/v1/movie", verifyToken ,movieRoutes);
 app.use("/api/v1/tv", verifyToken, tvRoutes);
 // routes for search
 app.use("/api/v1/search", verifyToken, searchRoutes);
+// route for person
+app.use("/api/v1/person", verifyToken, personRoutes);
 
 // Public routes (no auth)
 app.use("/api/v1/public", publicRoutes);
