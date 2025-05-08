@@ -237,6 +237,7 @@ useEffect(() => {
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
+                  <Link key={actor.id} to={`/person/${actor.id}`}>
                   <img
                     src={
                       actor.profile_path
@@ -248,6 +249,7 @@ useEffect(() => {
                   />
                   <p className="text-xs sm:text-sm font-medium text-center truncate w-full">{actor.name}</p>
                   <p className="text-[10px] text-gray-400 text-center truncate w-full">{actor.character}</p>
+                  </Link>
                 </motion.div>
               ))}
             </motion.div>

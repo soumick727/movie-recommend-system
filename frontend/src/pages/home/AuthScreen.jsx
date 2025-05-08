@@ -244,17 +244,17 @@ const AuthScreen = () => {
                 {
                     name: "Aarav S.",
                     review: "BeeWatch completely changed my binge-watching game! I never run out of good shows to watch.",
-                    image: "/avatars/aarav.png",
+                    image: "/user.png",
                 },
                 {
                     name: "Tanya M.",
                     review: "I love how it learns my preferences over time. It feels like Netflix, but smarter!",
-                    image: "/avatars/tanya.png",
+                    image: "/user.png",
                 },
                 {
                     name: "Rahul K.",
                     review: "I found hidden gems I would've never discovered. Highly recommended to all movie lovers.",
-                    image: "/avatars/rahul.png",
+                    image: "/user.png",
                 },
                 ].map((user, i) => (
                 <motion.div
