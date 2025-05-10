@@ -20,7 +20,7 @@ export const searchMovies = async (req, res) => {
             $push: { 
                 searchHistory: { 
                     id: data.results[0].id,
-                    name: data.results[0].poster_path,
+                    image: data.results[0].poster_path,
                     title: data.results[0].title,
                     searchType: "movie",
                     searchDate: new Date(),    
@@ -55,7 +55,7 @@ export const searchTvs = async(req, res) => {
             $push: { 
                 searchHistory: { 
                     id:data.results[0].id,
-                    name: data.results[0].poster_path,
+                    image: data.results[0].poster_path,
                     title: data.results[0].name,
                     searchType: "tv",
                     searchDate: new Date(),    
@@ -93,7 +93,7 @@ export const searchPerson = async(req, res) => {
             $push: { 
                 searchHistory: { 
                     id:data.results[0].id,
-                    name: data.results[0].profile_path,
+                    image: data.results[0].profile_path,
                     title: data.results[0].name,
                     searchType: "person",
                     searchDate: new Date(),    
@@ -116,38 +116,22 @@ export const searchPerson = async(req, res) => {
 };
 
 export const deleteSearchHistory = async (req, res) => {
-    try{
-        const { id } = req.params;
-        const user = await User.findByIdAndUpdate(req.user._id,{
-            $pull: { searchHistory: { _id: id },
-         },
-        });
-        if (!user) {
-            return res.status(404).json({
-                success: false,
-                message: "User not found",
-            });
-        }
-        if(user.searchHistory.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: "No search history found",
-            });
-        }
+   let { id } = req.params;
 
-        res.json({
-            success: true,
-            message: "Search history deleted successfully",
-            content: user.searchHistory,
-        })
-    }
-    catch(error){
-        console.error("Error deleting search history:", error.message);
-        res.status(500).json({ 
-            success: false,
-            message: "Internal Server Error" 
-        });
-    }
+	id = parseInt(id);
+
+	try {
+		await User.findByIdAndUpdate(req.user._id, {
+			$pull: {
+				searchHistory: { id: id },
+			},
+		});
+
+		res.status(200).json({ success: true, message: "Item removed from search history" });
+	} catch (error) {
+		console.log("Error in removeItemFromSearchHistory controller: ", error.message);
+		res.status(500).json({ success: false, message: "Internal Server Error" });
+	}
 }
 
 export const getSearchHistory = async (req, res) => {
