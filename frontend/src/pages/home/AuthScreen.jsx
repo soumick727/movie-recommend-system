@@ -41,7 +41,7 @@ const AuthScreen = () => {
                     Discover hidden gems, timeless classics, and trending favorites. BeeWatch curates movie and TV show recommendations tailored just for you. Let us take the guesswork out of your next watch!
                 </p>
                 <p className="text-gray-200 mb-4">
-                    Enter your email to visit your home screen
+                    Enter your email to start with the sign-up process and get personalized recommendations.
                 </p>
 
                 {/* Email Input Form */}
@@ -154,29 +154,29 @@ const AuthScreen = () => {
         github: "#",
       },
       {
-        name: "John Doe",
+        name: "Pralay Patra",
         role: "Frontend Developer",
         img: "/team/pralay.jpg",
         linkedin: "#",
         github: "#",
       },
       {
-        name: "Jane Smith",
+        name: "Oliva Dutta",
         role: "Frontend Developer",
         img: "/team/oliva.jpg",
         linkedin: "#",
         github: "#",
       },
       {
-        name: "Alex Lee",
+        name: "Dwip Sasmal",
         role: "Backend Developer",
         img: "/team/dwip.png",
         linkedin: "#",
         github: "#",
       },
       {
-        name: "Sam Taylor",
-        role: "Chill & Mosti",
+        name: "Sayan Maji",
+        role: "Frontend Developer",
         img: "/team/sayan.jpg",
         linkedin: "#",
         github: "#",

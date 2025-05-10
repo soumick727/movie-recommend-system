@@ -4,6 +4,9 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import WatchPage from "./pages/WatchPage";
 import SearchPage from "./pages/SearchPage";
+import SearchHistory from "./pages/SearchHistory";
+import Questionnaire from "./pages/Questionnaire ";
+import RecommendationResult from './pages/RecommendationResult';
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 import { Loader } from "lucide-react";
@@ -60,7 +63,11 @@ function App() {
           <Route path="/search" element={user ? <SearchPage /> : <Navigate to="/login" />} />
           {/* person page */}
           <Route path="/person/:id" element={user ? <PersonPage /> : <Navigate to="/login" />} />
-          
+          {/* history page */}
+          <Route path="/history" element={user ? <SearchHistory/> : <Navigate to="/login"/>} />
+          {/* questionnaire page */}
+          <Route path="/question" element={user ? <Questionnaire/> : <Navigate to="/login"/>} />
+          <Route path='/recommendation' element={user ? <RecommendationResult />: <Navigate to="/login"/>} />
         </Routes>
       </main>
 

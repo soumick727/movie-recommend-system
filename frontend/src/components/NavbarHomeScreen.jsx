@@ -73,11 +73,8 @@ const NavbarHomeScreen = () => {
           <Link to="/" onClick={() => setContentType("tv")} className="hover:text-yellow-400 transition">
             TV Shows
           </Link>
-          <Link to="/watchlist" className="hover:text-yellow-400 transition">
-            Watchlist
-          </Link>
-          <Link to="/history" className="hover:text-yellow-400 transition">
-            Search History
+          <Link to="/question" className="hover:text-yellow-400 transition">
+            recommended
           </Link>
         </div>
 
@@ -104,11 +101,11 @@ const NavbarHomeScreen = () => {
             <button
               onClick={() => {
                 setShowDropdown(false);
-                navigate("/watchlist");
+                navigate("/history");
               }}
               className="w-full text-left px-4 py-2 text-sm hover:bg-yellow-100"
             >
-              📺 Watchlist
+              Search History
             </button>
 
             <button
@@ -167,8 +164,10 @@ const NavbarHomeScreen = () => {
               }}>TV Shows</Link>
             </li>
             <li>
-              <Link to="/watchlist" onClick={() => setIsOpen(false)}>Watchlist</Link>
-            </li>
+            <Link to="/question" className="hover:text-yellow-400 transition">
+            recommended
+          </Link>
+          </li>
             <li>
               <Link to="/history" onClick={() => setIsOpen(false)}>Search History</Link>
             </li>
