@@ -171,7 +171,7 @@ const HomeScreen = () => {
                         to={`/watch/${featureContent?.id}`}
                         className="flex items-center gap-2 bg-white hover:bg-white/90 text-black font-bold py-1.5 px-3 sm:py-2 sm:px-4 rounded text-sm transition"
                       >
-                        <Play className="w-4 h-4 sm:w-5 sm:h-5" /> Play
+                        <Play className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" /> Play
                       </Link>
 
                       <Link

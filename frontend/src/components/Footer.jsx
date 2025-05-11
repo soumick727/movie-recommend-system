@@ -4,7 +4,17 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Branding */}
           <div>
-            <h2 className="text-yellow-400 text-2xl font-bold mb-2">🎬 BeeWatch</h2>
+            <h1 className="text-white text-2xl md:text-4xl font-extrabold tracking-wide animate-fade-in flex  gap-3 flex-wrap">
+              <span className="flex items-center gap-2 text-yellow-400">
+                BeeWatch
+                <img
+                  src="/bee.png"
+                  alt="Bee icon"
+                  className="h-10 w-auto "
+                />
+              </span>
+            </h1>
+
             <p className="text-sm text-zinc-400">
               Discover trending movies and TV shows. Built with ❤️ by passionate movie lovers.
             </p>

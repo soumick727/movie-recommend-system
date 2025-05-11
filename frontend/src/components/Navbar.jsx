@@ -8,15 +8,22 @@ function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <nav className="bg-transparent text-white px-6 py-4 flex justify-between items-center shadow-md fixed top-0 left-0 w-full z-50 backdrop-blur-sm">
+    <nav className="bg-transparent text-white px-6 py-4 flex justify-between items-center shadow-md  top-0 left-0 w-full z-50 backdrop-blur-sm">
 
       {/* Logo / Brand */}
-      <Link
-        to="/"
-        className="text-2xl font-bold text-yellow-400 tracking-wide hover:text-yellow-300 transition duration-200"
-      >
-        BeeWatch 🎬
-      </Link>
+  <Link
+  to="/"
+  className="flex items-center gap-2 transform hover:scale-105 transition duration-300 ease-in-out"
+>
+  <img
+    src="/bee.png"
+    alt="BeeWatch Logo"
+    className="h-14 w-auto drop-shadow-[0_0_6px_rgba(255,223,0,0.8)]  transition duration-300"
+  />
+  <span className="text-3xl font-extrabold text-yellow-400 drop-shadow-sm">BeeWatch</span>
+</Link>
+
+
 
       {/* Hamburger - Mobile only */}
       <button className="md:hidden" onClick={toggleMenu}>
@@ -35,9 +42,7 @@ function Navbar() {
             Contact Us
         </Link>
 
-        <Link to="/explore" className="hover:text-yellow-400 transition duration-200">
-          Explore
-        </Link>
+        
         <Link
           to="/signup"
           className="bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition"
@@ -64,9 +69,6 @@ function Navbar() {
         <Link to="/contact" className="hover:text-yellow-400 transition duration-200">
             Contact Us
         </Link>
-          <Link to="/explore" className="hover:text-yellow-400 transition duration-200" onClick={toggleMenu}>
-            Explore
-          </Link>
           <Link
             to="/signup"
             className="bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold hover:bg-yellow-300 transition"

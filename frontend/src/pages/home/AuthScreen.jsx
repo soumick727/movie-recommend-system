@@ -32,9 +32,18 @@ const AuthScreen = () => {
             <Navbar />
             <div className="cover-pg flex flex-col items-center justify-center text-center gap-6 px-4 pt-24 min-h-screen">
                 {/* Heading */}
-                <h1 className="text-white text-3xl md:text-6xl font-extrabold tracking-wide animate-fade-in">
-                    Welcome To <span className="text-yellow-400">BeeWatch 🎬</span>
+                <h1 className="text-white text-3xl md:text-6xl font-extrabold tracking-wide animate-fade-in flex items-center justify-center gap-3 flex-wrap">
+                  Welcome To 
+                  <span className="flex items-center gap-2 text-yellow-400">
+                    BeeWatch
+                    <img
+                      src="/bee.png"
+                      alt="Bee icon"
+                      className="h-14 w-auto "
+                    />
+                  </span>
                 </h1>
+
 
                 {/* Subheading */}
                 <p className="text-gray-200 text-lg md:text-2xl max-w-xl animate-fade-in-delay">

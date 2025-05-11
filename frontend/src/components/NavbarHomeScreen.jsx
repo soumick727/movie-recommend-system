@@ -50,11 +50,16 @@ const NavbarHomeScreen = () => {
     <>
     <header className="backdrop-blur-md relative bg-black/40 text-white shadow-md  top-0 z-50 border-b border-yellow-400/30">
       <nav className="container  mx-auto px-4 py-3 flex items-center justify-between">
-        <Link
+         <Link
           to="/"
-          className="text-3xl font-extrabold text-yellow-400 tracking-widest"
+          className="flex items-center gap-2 transform hover:scale-105 transition duration-300 ease-in-out"
         >
-          BeeWatch
+          <img
+            src="/bee.png"
+            alt="BeeWatch Logo"
+            className="h-14 w-auto drop-shadow-[0_0_6px_rgba(255,223,0,0.8)]  transition duration-300"
+          />
+          <span className="text-3xl font-extrabold text-yellow-400 drop-shadow-sm">BeeWatch</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -67,14 +72,14 @@ const NavbarHomeScreen = () => {
             Search
           </button>
 
-          <Link to="/" onClick={() => setContentType("movie")} className="hover:text-yellow-400 transition">
+          <Link to="/" onClick={() => setContentType("movie")} className="font-extrabold hover:text-yellow-400 transition">
             Movies
           </Link>
-          <Link to="/" onClick={() => setContentType("tv")} className="hover:text-yellow-400 transition">
+          <Link to="/" onClick={() => setContentType("tv")} className="font-extrabold hover:text-yellow-400 transition">
             TV Shows
           </Link>
-          <Link to="/question" className="hover:text-yellow-400 transition">
-            recommended
+          <Link to="/question" className="font-extrabold hover:text-yellow-400 transition">
+            Get Recommendations
           </Link>
         </div>
 
