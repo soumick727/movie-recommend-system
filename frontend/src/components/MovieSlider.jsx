@@ -73,6 +73,7 @@ const MovieSlider = ({ category }) => {
                     className="object-cover w-full h-full rounded-xl"
                   />
                 </Link>
+
               </div>
             ))
           ) : (

@@ -11,11 +11,15 @@ const questions = [
   },
   {
     question: 'Which year movie do you prefer?',
-    options: ['2025', '2024', '2023', '2022', '2021', '2020'],
+    options: ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010', '2009', '2008', '2007', '2006', '2005'],
   },
   {
     question: 'What language are you comfortable watching?',
-    options: ['English', 'French','Hindi', 'Telugu'],
+    options: ['English', 'French', 'Hindi', 'Telugu', 'Bengali', 'Tamil', 'Malayalam', 'Punjabi'],
+  },
+  {
+    question: 'What is your preferred movie duration?',
+    options: ['Less than 1 hour', '1-2 hours', '2-3 hours', 'More than 3 hours'],
   },
 ];
 
@@ -27,18 +31,17 @@ const Questionnaire = () => {
   const navigate = useNavigate();
 
   const handleOptionClick = async (option) => {
-    console.log(`Question: ${questions[currentQuestion].question}`);
-    console.log(`Selected: ${option}`);
-
     if (currentQuestion === 0) {
-      // Toggle multi-select for genres
+      console.log('Selected Genres:', selectedGenres);
       if (selectedGenres.includes(option)) {
+
         setSelectedGenres(selectedGenres.filter((genre) => genre !== option));
       } else {
         setSelectedGenres([...selectedGenres, option]);
       }
     } else {
-      const updatedAnswers = [...answers, option];
+      const updatedAnswers = [...answers];
+      updatedAnswers[currentQuestion - 1] = option;
 
       if (currentQuestion < questions.length - 1) {
         setAnswers(updatedAnswers);
@@ -47,9 +50,10 @@ const Questionnaire = () => {
         try {
           setLoading(true);
           const finalAnswers = [selectedGenres.join(','), ...updatedAnswers];
-          console.log("Final Answers Submitted:", finalAnswers);
+          console.log('Final Answers:', finalAnswers);
+          // Send the answers to the backend for recommendation
+
           const res = await axios.post('/api/v1/recommendation', { answers: finalAnswers });
-          console.log("Backend Response:", res);
           const recommendedMovie = res.data.content;
           navigate('/recommendation', { state: { movie: recommendedMovie } });
         } catch (err) {
@@ -67,12 +71,12 @@ const Questionnaire = () => {
       toast.error('Please select at least one genre');
       return;
     }
-
-    console.log(`Question: ${questions[currentQuestion].question}`);
-    console.log(`Selected: ${selectedGenres.join(', ')}`);
-
-    setAnswers([]);
     setCurrentQuestion(1);
+  };
+
+  const handleBackClick = () => {
+    if (currentQuestion === 0) return;
+    setCurrentQuestion(currentQuestion - 1);
   };
 
   return (
@@ -83,11 +87,13 @@ const Questionnaire = () => {
           <h2 className='text-2xl md:text-3xl font-bold'>
             {questions[currentQuestion].question}
           </h2>
+
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             {questions[currentQuestion].options.map((option, index) => {
-              const isSelected = currentQuestion === 0
-                ? selectedGenres.includes(option)
-                : answers[currentQuestion - 1] === option;
+              const isSelected =
+                currentQuestion === 0
+                  ? selectedGenres.includes(option)
+                  : answers[currentQuestion - 1] === option;
 
               return (
                 <button
@@ -107,13 +113,21 @@ const Questionnaire = () => {
             })}
           </div>
 
-          {currentQuestion === 0 && (
+          {currentQuestion === 0 ? (
             <button
               onClick={handleNextClick}
               className='mt-4 bg-yellow-500 text-black font-semibold py-2 px-6 rounded-md hover:bg-yellow-400 transition'
               disabled={selectedGenres.length === 0 || loading}
             >
               Next
+            </button>
+          ) : (
+            <button
+              onClick={handleBackClick}
+              className='mt-4 bg-gray-700 text-white font-semibold py-2 px-6 rounded-md hover:bg-gray-600 transition'
+              disabled={loading}
+            >
+              Back
             </button>
           )}
 
@@ -122,6 +136,13 @@ const Questionnaire = () => {
           </p>
         </div>
       </div>
+
+      {loading && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex flex-col items-center justify-center">
+          <div className="w-16 h-16 border-4 border-yellow-400 border-dashed rounded-full animate-spin mb-4"></div>
+          <p className="text-white text-lg font-medium">Fetching your recommendation...</p>
+        </div>
+      )}
     </>
   );
 };

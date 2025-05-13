@@ -6,15 +6,11 @@ import useGetTrendingContent from '../../hooks/useGetTrendingContent';
 import useGetGenres from '../../hooks/useGenres';
 import NavbarHomeScreen from '../../components/NavbarHomeScreen';
 import { LARGE_IMG_BASE_URL,MOVIE_CATEGORIES,TV_CATEGORIES } from '../../utils/constants';
-
 import { useContentStore } from '../../store/content';
 import MovieSlider from '../../components/MovieSlider';
 
 
 const HomeScreen = () => {
-  
-  
-
   const trendingContent = useGetTrendingContent();
   const genreNames = useGetGenres();
   const { contentType } = useContentStore();
@@ -31,7 +27,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % contents.length);
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [contents.length]);
 

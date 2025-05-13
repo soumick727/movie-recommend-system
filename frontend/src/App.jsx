@@ -5,6 +5,7 @@ import SignUpPage from "./pages/SignUpPage";
 import WatchPage from "./pages/WatchPage";
 import SearchPage from "./pages/SearchPage";
 import SearchHistory from "./pages/SearchHistory";
+import AboutPage from "./pages/home/AboutPage";
 import Questionnaire from "./pages/Questionnaire ";
 import RecommendationResult from './pages/RecommendationResult';
 import Footer from "./components/Footer";
@@ -68,6 +69,8 @@ function App() {
           {/* questionnaire page */}
           <Route path="/question" element={user ? <Questionnaire/> : <Navigate to="/login"/>} />
           <Route path='/recommendation' element={user ? <RecommendationResult />: <Navigate to="/login"/>} />
+          {/* about page */}
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </main>
 

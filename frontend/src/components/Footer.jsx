@@ -1,4 +1,6 @@
+import { useContentStore } from "../store/content";
 const Footer = () => {
+  const { setContentType } = useContentStore();
     return (
       <footer className="bg-zinc-900 text-white px-6 py-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -25,8 +27,8 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
             <ul className="text-sm text-zinc-400 space-y-1">
               <li><a href="/" className="hover:text-yellow-400 transition">Home</a></li>
-              <li><a href="/movies" className="hover:text-yellow-400 transition">Movies</a></li>
-              <li><a href="/tv" className="hover:text-yellow-400 transition">TV Shows</a></li>
+              <li><a href="/" onClick={() => setContentType("movie")} className="hover:text-yellow-400 transition">Movies</a></li>
+              <li><a href="/" onClick={() => setContentType("tv")} className="hover:text-yellow-400 transition">TV Shows</a></li>
               <li><a href="/about" className="hover:text-yellow-400 transition">About</a></li>
             </ul>
           </div>
