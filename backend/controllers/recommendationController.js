@@ -15,11 +15,22 @@ const genreMap = {
   Crime: 80,
 };
 
+const durationMap = {
+  'Less than 1 hour': { min: 0, max: 60 },
+  '1-2 hours': { min: 60, max: 120 },
+  '2-3 hours': { min: 120, max: 180 },
+  'More than 3 hours': { min: 180, max: Infinity },
+}
+
 const languageMap = {
   English: 'en',
   French: 'fr',
   Hindi: 'hi',
   Telugu: 'te',
+  Bengali: 'bn',
+  Tamil: 'ta',
+  Malayalam: 'ml',
+  Punjabi: 'pa',
 };
 
 export const recommendMovie = async (req, res) => {
@@ -41,6 +52,7 @@ export const recommendMovie = async (req, res) => {
 
     const releaseYear = answers[1]; 
     const originalLanguage = answers[2]; 
+    const duration = durationMap[answers[3]] || { min: 0, max: Infinity };
     const languageId = languageMap[originalLanguage] || 'en';
 
     const url = `https://api.themoviedb.org/3/discover/movie?` +
@@ -48,6 +60,9 @@ export const recommendMovie = async (req, res) => {
                 `primary_release_year=${releaseYear}&` +
                 `with_original_language=${languageId}&` +
                 `sort_by=popularity.desc&` +
+                `with_runtime.gte=${duration.min}&` +
+                `with_runtime.lte=${duration.max}&` +
+                `include_adult=false&` +
                 `language=en-US&` +
                 `api_key=${process.env.TMDB_API_KEY}`;
 
@@ -58,9 +73,11 @@ export const recommendMovie = async (req, res) => {
       return res.status(404).json({ message: 'No movies found for the selected genres, release year, and language.' });
     }
 
-    const recommended = movies[Math.floor(Math.random() * movies.length)];
+    // show 4 recommended movies
+   
+    const recommendedMovies = movies.slice(0, Math.min(4, movies.length));
 
-    res.status(200).json({ content: recommended });
+    res.status(200).json({ content: recommendedMovies });
   } catch (error) {
     console.error('Recommendation error:', error.message);
     res.status(500).json({ message: 'Something went wrong.' });

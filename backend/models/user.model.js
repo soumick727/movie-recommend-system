@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
     searchHistory: {
         type: Array,
         default: []
-    }
+    },
 });
 
 const User = mongoose.model("User", userSchema);

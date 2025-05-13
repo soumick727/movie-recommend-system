@@ -43,8 +43,7 @@ app.use("/api/v1/search", verifyToken, searchRoutes);
 // route for person
 app.use("/api/v1/person", verifyToken, personRoutes);
 // route for recommendation
-app.use("/api/v1/recommendation",verifyToken, recommendationRoutes)
-
+app.use("/api/v1/recommendation",verifyToken, recommendationRoutes);
 // Public routes (no auth)
 app.use("/api/v1/public", publicRoutes);
 

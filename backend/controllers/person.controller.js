@@ -1,5 +1,23 @@
 import { fetchFromTMDB } from "../services/tmdb.service.js";
 
+
+export async function getTrendingPerson(req, res) {
+    try {
+        const url = "https://api.themoviedb.org/3/trending/person/day?language=en-US";
+        const data = await fetchFromTMDB(url);
+        res.json({
+            success: true,
+            message: "Trending persons fetched successfully",
+            content: data,
+        });
+    } catch (error) {
+        console.error("Error fetching trending persons:", error.message);
+        res.status(500).json({ 
+            success: false,
+            message: "Internal Server Error" });
+    }
+}
+
 export async function getPersonDetails(req, res) {
     try {
         const { id } = req.params;
