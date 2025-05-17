@@ -20,7 +20,8 @@ import User from "../models/user.model.js";
             })
         }
         // check if password is strong or not
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#!$&%])[A-Za-z\d@#!$&%]{10,}$/;
+
         if(!passwordRegex.test(password)){
             return res.status(400).json({
                 success: false,

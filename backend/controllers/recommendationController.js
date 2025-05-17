@@ -14,6 +14,14 @@ const genreMap = {
   Documentary: 99,
   Crime: 80,
 };
+const releaseYearMap = {
+  '2020-2025': { min: 2020, max: 2025 },
+  '2015-2020': { min: 2015, max: 2020 },
+  '2010-2015': { min: 2010, max: 2015 },
+  '2005-2010': { min: 2005, max: 2010 },
+  '2000-2005': { min: 2000, max: 2005 },
+  'Before 2000': { min: 1900, max: 1999 },
+};
 
 const durationMap = {
   'Less than 1 hour': { min: 0, max: 60 },
@@ -50,14 +58,15 @@ export const recommendMovie = async (req, res) => {
       .filter(Boolean)
       .join(',');
 
-    const releaseYear = answers[1]; 
+    const releaseYear =  releaseYearMap[answers[1]] || { min: 1900, max: 2025 };
     const originalLanguage = answers[2]; 
     const duration = durationMap[answers[3]] || { min: 0, max: Infinity };
     const languageId = languageMap[originalLanguage] || 'en';
 
     const url = `https://api.themoviedb.org/3/discover/movie?` +
                 `with_genres=${genreIds}&` +
-                `primary_release_year=${releaseYear}&` +
+                `primary_release_date.gte=${releaseYear.min}-01-01&` +
+                `primary_release_date.lte=${releaseYear.max}-12-31&` +
                 `with_original_language=${languageId}&` +
                 `sort_by=popularity.desc&` +
                 `with_runtime.gte=${duration.min}&` +
