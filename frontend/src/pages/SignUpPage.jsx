@@ -13,12 +13,12 @@ const SignUpPage = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const passwordRules = {
-    upper: /[A-Z]/,
-    lower: /[a-z]/,
-    number: /[0-9]/,
-    special: /[^A-Za-z0-9]/,
-    length: /^.{10,}$/,
-  };
+  upper: /[A-Z]/,                // At least one uppercase letter
+  lower: /[a-z]/,                // At least one lowercase letter
+  number: /[0-9]/,               // At least one number
+  special: /[@#!$&%]/,           // At least one of these special characters
+  length: /^.{10,}$/,            // Minimum length of 10 characters
+};
   
   const passwordStatus = {
     upper: passwordRules.upper.test(password),

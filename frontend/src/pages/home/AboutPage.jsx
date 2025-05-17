@@ -1,5 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
+import NavbarHomeScreen from '../../components/NavbarHomeScreen';
+import { useAuthUser } from '../../store/authUser';
 
 const team = [
   {
@@ -25,9 +27,11 @@ const team = [
 ];
 
 const AboutPage = () => {
+  const { user } = useAuthUser();
+  const isLoggedIn = !!user;
   return (
     <div className="bg-black min-h-screen text-white">
-      <Navbar/>
+      {isLoggedIn ? <NavbarHomeScreen /> : <Navbar />}
       <div className="container mx-auto px-4 py-10">
         <h1 className="text-3xl sm:text-4xl font-bold text-yellow-400 mb-6 text-center">About BeeWatch</h1>
         

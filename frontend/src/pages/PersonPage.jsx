@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import NavbarHomeScreen from '../components/NavbarHomeScreen'
-import { LARGE_IMG_BASE_URL } from '../utils/constants'
+import { LARGE_IMG_BASE_URL, SMALL_IMG_BASE_URL } from '../utils/constants'
 import toast from 'react-hot-toast'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -62,20 +62,21 @@ const MediaScroller = ({ items = [], keyPrefix = '' }) => {
         className='flex gap-4 overflow-x-auto scrollbar-hide py-4 scroll-smooth'
       >
         {items.map((item, idx) => (
+          
           <Link
             to={`/watch/${item.id}`}
             key={`${keyPrefix}-${item.id}-${idx}`}
             className='min-w-[150px] max-w-[150px] hover:scale-105 transition-transform duration-300 cursor-pointer'
           >
-            <img
-              src={
-                item.poster_path
-                  ? `${LARGE_IMG_BASE_URL}${item.poster_path}`
-                  : 'https://via.placeholder.com/150x225?text=No+Image'
-              }
-              alt={item.title || item.name}
-              className='rounded-lg shadow-md'
-            />
+            {/* //remove the placeholder if no poster path found the remove that poster path */}
+
+            {item.poster_path && (
+              <img
+                src={`${SMALL_IMG_BASE_URL}${item.poster_path}`}
+                alt={item.title || item.name}
+                className='rounded-lg  shadow-md'
+              />
+            )}
             <p className='text-sm mt-2 text-center text-gray-300'>
               {item.title || item.name}
             </p>

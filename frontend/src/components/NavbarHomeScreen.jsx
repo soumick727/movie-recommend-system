@@ -49,7 +49,8 @@ const NavbarHomeScreen = () => {
   return (
     <>
     <header className="backdrop-blur-md relative bg-black/40 text-white shadow-md  top-0 z-50 border-b border-yellow-400/30">
-      <nav className="container  mx-auto px-4 py-3 flex items-center justify-between">
+      <nav className="w-full max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
+
          <Link
           to="/"
           className="flex items-center gap-2 transform hover:scale-105 transition duration-300 ease-in-out"

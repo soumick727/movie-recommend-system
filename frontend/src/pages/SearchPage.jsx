@@ -17,10 +17,8 @@ const SearchPage = () => {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    // if (tab !== 'person') 
-    setContentType(tab);
+    if (tab !== 'person') setContentType(tab);
     setSearchResults([]);
-    setSearchTerm('');
   };
 
   const handleSearch = async (e) => {
@@ -55,6 +53,7 @@ const SearchPage = () => {
 
   const renderCard = (item, type) => {
   const imagePath = type === 'person' ? item.profile_path : item.poster_path;
+  if (!imagePath) return null; // Skip rendering if no image path
   const title = item.title || item.name;
   const routePath = type === 'person' ? `/person/${item.id}` : `/watch/${item.id}`;
   const rating = item.vote_average;
