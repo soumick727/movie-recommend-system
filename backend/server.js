@@ -13,7 +13,8 @@ import cookieParser from 'cookie-parser';
 import path from "path";
 import { verifyToken } from "./middlewares/auth.middleware.js";
 
-dotenv.config({ path: "./backend/.env" });
+// dotenv.config({ path: "./backend/.env" });
+dotenv.config();
 
 
 const app = express();
