@@ -6,6 +6,10 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
+    host: true,
+    allowedHosts: [
+      "abcde-soumick.starnix.in" // Add your domain here
+    ],
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
