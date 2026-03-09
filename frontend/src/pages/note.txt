@@ -1,0 +1,38 @@
+  const renderCard = (item, type) => {
+    const imagePath = type === 'person' ? item.profile_path : item.poster_path;
+    if (!imagePath) return null;
+
+    const title = item.title || item.name;
+    const routePath = type === 'person' ? `/person/${item.id}` : `/watch/${item.id}`;
+    const rating = item.vote_average;
+
+    return (
+      <div
+        key={item.id}
+        className="relative bg-gray-900 rounded-xl shadow-md hover:shadow-yellow-400/30 transition-shadow overflow-hidden"
+      >
+        {rating && type !== 'person' && (
+          <span
+            className={`absolute top-2 right-2 text-xs font-semibold px-2 py-1 rounded-full shadow-md z-10 ${getRatingColor(
+              rating
+            )}`}
+          >
+            ⭐ {rating.toFixed(1)}
+          </span>
+        )}
+
+        <Link to={routePath} onClick={() => setContentType(type)}>
+          <img
+            src={LARGE_IMG_BASE_URL + imagePath}
+            alt={title}
+            className="h-[240px] sm:h-[280px] md:h-[300px] w-full object-cover rounded-t-xl"
+          />
+          <div className="p-2 sm:p-3">
+            <h3 className="text-sm sm:text-base font-semibold text-yellow-400 text-center line-clamp-2">
+              {item.title}
+            </h3>
+          </div>
+        </Link>
+      </div>
+    );
+  };
