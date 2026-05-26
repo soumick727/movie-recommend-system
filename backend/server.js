@@ -39,15 +39,15 @@ app.use("/images",express.static(path.join(process.cwd(), 'images')));
 // routes for authentication
 app.use("/api/v1/auth",authRoutes);
 // routes for movies
-app.use("/api/v1/movie", verifyToken ,movieRoutes);
+app.use("/api/v1/movie", movieRoutes);
 // routes for tv
-app.use("/api/v1/tv", verifyToken, tvRoutes);
+app.use("/api/v1/tv",  tvRoutes);
 // routes for search
-app.use("/api/v1/search", verifyToken, searchRoutes);
+app.use("/api/v1/search",  searchRoutes);
 // route for person
-app.use("/api/v1/person", verifyToken, personRoutes);
+app.use("/api/v1/person",  personRoutes);
 // route for recommendation
-app.use("/api/v1/recommendation",verifyToken, recommendationRoutes);
+app.use("/api/v1/recommendation", recommendationRoutes);
 // Public routes (no auth)
 app.use("/api/v1/public", publicRoutes);
 
