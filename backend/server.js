@@ -43,7 +43,7 @@ app.use("/api/v1/movie", movieRoutes);
 // routes for tv
 app.use("/api/v1/tv",  tvRoutes);
 // routes for search
-app.use("/api/v1/search",  searchRoutes);
+app.use("/api/v1/search", verifyToken, searchRoutes);
 // route for person
 app.use("/api/v1/person",  personRoutes);
 // route for recommendation
