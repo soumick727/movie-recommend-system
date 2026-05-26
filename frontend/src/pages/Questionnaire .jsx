@@ -11,7 +11,7 @@ const questions = [
   },
   {
     question: 'Which year movie do you prefer?',
-    options: ['2020-2025', '2015-2020', '2010-2015', '2005-2010', '2000-2005', 'Before 2000'],
+    options: ['2020-2026', '2015-2020', '2010-2015', '2005-2010', '2000-2005', 'Before 2000'],
   },
   {
     question: 'What language are you comfortable watching?',

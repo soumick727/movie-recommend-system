@@ -15,7 +15,7 @@ const genreMap = {
   Crime: 80,
 };
 const releaseYearMap = {
-  '2020-2025': { min: 2020, max: 2025 },
+  '2020-2026': { min: 2020, max: 2026 },
   '2015-2020': { min: 2015, max: 2020 },
   '2010-2015': { min: 2010, max: 2015 },
   '2005-2010': { min: 2005, max: 2010 },
@@ -82,9 +82,9 @@ export const recommendMovie = async (req, res) => {
       return res.status(404).json({ message: 'No movies found for the selected genres, release year, and language.' });
     }
 
-    // show 4 recommended movies
+    // show 8 recommendations
    
-    const recommendedMovies = movies.slice(0, Math.min(4, movies.length));
+    const recommendedMovies = movies.slice(0, Math.min(8, movies.length));
 
     res.status(200).json({ content: recommendedMovies });
   } catch (error) {
