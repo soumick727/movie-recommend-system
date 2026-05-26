@@ -24,7 +24,7 @@ app.use(express.json()); // will allow us to parse req.body
 // app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(cors({
     origin: ["http://localhost:5173",
-        "https://abcde-soumick.starnix.in"
+        "https://movie-recommend-system-two.vercel.app"
     ], // or the IP of your frontend if it's different
     
   credentials: true
