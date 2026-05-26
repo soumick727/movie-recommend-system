@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useContentStore } from "../store/content";
 
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
 const useGetGenres = () => {
     
     const [genres, setGenres] = useState([]);

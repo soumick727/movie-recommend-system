@@ -7,6 +7,8 @@ import { motion } from 'framer-motion';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
 const WatchPage = () => {
   const { contentType } = useContentStore();
   const castRef = useRef(null);

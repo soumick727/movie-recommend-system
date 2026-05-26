@@ -5,6 +5,8 @@ import { SMALL_IMG_BASE_URL } from "../utils/constants";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
 
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
 const MovieSlider = ({ category }) => {
   const { contentType } = useContentStore();
   const [content, setContent] = useState([]);

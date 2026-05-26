@@ -6,6 +6,8 @@ import { LARGE_IMG_BASE_URL, SMALL_IMG_BASE_URL } from '../utils/constants'
 import toast from 'react-hot-toast'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
 const HorizontalScroll = ({ children }) => {
   const scrollContainer = useRef(null)
 

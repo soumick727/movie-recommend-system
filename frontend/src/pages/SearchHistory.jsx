@@ -5,6 +5,8 @@ import { SMALL_IMG_BASE_URL } from "../utils/constants";
 import { Trash2, Film, Tv } from "lucide-react";
 import toast from "react-hot-toast";
 
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
 function formatDate(dateString) {
 	const date = new Date(dateString);
 	const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

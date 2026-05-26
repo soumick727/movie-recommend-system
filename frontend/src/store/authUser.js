@@ -2,6 +2,8 @@ import axios from "axios";
 import { create } from "zustand";
 import toast from "react-hot-toast";
 
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
 export const useAuthUser = create((set) => ({
   user: null,
   isSigningUp: false,
